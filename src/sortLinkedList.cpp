@@ -18,6 +18,29 @@ struct node {
 	struct node *next;
 };
 
+typedef struct node *lptr;
+
+void Interchange(lptr node1, lptr node2){
+	int tmp;
+	tmp = node1->num;
+	node1->num = node2->num;
+	node2->num = tmp;
+
+}
+
 struct node * sortLinkedList(struct node *head) {
-	return NULL;
+	lptr first, second;
+
+	if (head == NULL)
+		return NULL;
+	if (head->next == NULL)
+		return head;
+
+	for (first = head; first->next != NULL; first = first->next)
+		for (second = first->next; second != NULL; second = second->next)
+			if (first->num > second->num)
+				Interchange(first, second);
+
+			
+	return head;
 }

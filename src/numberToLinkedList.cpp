@@ -19,6 +19,47 @@ struct node {
 	struct node *next;
 };
 
+typedef struct node *lptr;
+
+lptr insertFront(lptr head,int key){
+
+	lptr nptr;
+
+	if (head == NULL){
+		head = (lptr)malloc(sizeof(struct node));
+		head->num = key;	
+		head->next = NULL;
+		return head;
+	}
+
+	nptr = (lptr)malloc(sizeof(struct node));
+	nptr->num = key;
+	nptr->next = head;	
+	head = nptr;
+		
+	return head;
+}
+
 struct node * numberToLinkedList(int N) {
-	return NULL;
+	lptr head = NULL, nptr = NULL;
+	int rem = 0;
+
+	if (N < 0)
+		N *= -1;
+
+	if (N == 0){
+		nptr = (lptr)malloc(sizeof(struct node));
+		nptr->num = 0;
+		nptr->next = NULL;
+		return nptr;
+	}
+	
+	while (N != 0){
+		rem = N % 10;
+		head = insertFront(head, rem);
+		N /= 10;
+	}
+
+
+	return head;
 }
